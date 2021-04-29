@@ -1,7 +1,16 @@
+// Curse of the dead gods autosplitter by Lao_fr
+
+// Feel free to improve it. It's my 1st script ever.
+// Feedback or bug report:
+// Discord: CamaradeLao#6875 
+// https://twitch.tv/lao_fr
+// https://www.youtube.com/channel/UCltTM28Yx4eDBQlMT3upFYg
+
+
 state("Curse of the Dead Gods")
 {
 	float IGT : 0x01206F30, 0xD8, 0x18E0;
-   int levelnum : 0x011A2A50, 0x10, 0x89C;
+   int roomnum : 0x011A2A50, 0x10, 0x89C;
 
 }
 
@@ -16,7 +25,7 @@ startup
 
 start
 {
-	if (current.levelnum == 1 && old.levelnum == 0)
+	if (current.roomnum == 1 && old.roomnum == 0)
     {
         return true;
     }
@@ -25,7 +34,7 @@ start
 
 split
 {	
-    if (current.levelnum > old.levelnum)
+    if (current.roomnum > old.roomnum)
     {
 			return true;
 	 } 
