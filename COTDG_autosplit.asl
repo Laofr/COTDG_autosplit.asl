@@ -1,4 +1,4 @@
-// Curse of the dead gods autosplitter by Lao_fr
+// Curse of the dead gods autosplitter by Lao_fr , improved by FollowTheDopamine
 
 // Feel free to improve it. It's my 1st script ever.
 // Feedback or bug report:
