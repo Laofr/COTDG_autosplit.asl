@@ -12,16 +12,24 @@ state("Curse of the Dead Gods")
 	float IGT : 0x01206F30, 0xD8, 0x18E0;
 	int roomnum : 0x011A2A50, 0x10, 0x89C;
 	int victories : 0x01206F30, 0xD8, 0x1150;
+	float totalIGT : 0x01206F30, 0xD8, 0x164;
 }
 
 startup
 {
-	settings.Add("removeLoads", true, "Load Removal");
-	settings.SetToolTip("removeLoads", "Set this to true to remove loads and menu time");
+	settings.Add("syncIndividual", true, "Sync timer to temple time (individual temples)");
+	settings.SetToolTip("syncIndividual", "Set this to true to sync your game time to the individual temple in game clock");
+
+	settings.Add("syncMarathon", false, "Sync timer to profile time (marathon)");
+	settings.SetToolTip("syncMarathon", "Set this to true to sync your game time to the profile in game clock");
+
 	settings.Add("splitOnRoom", true, "Split on room");
 	settings.SetToolTip("splitOnRoom", "Set this to true to split after every door");
-	settings.Add("splitOnPortal", true, "Split on portal");
+
+	settings.Add("splitOnPortal", false, "Split on portal");
 	settings.SetToolTip("splitOnPortal", "Set this to true to split on the portal after bosses");
+
+	
 }
 
 start
@@ -45,14 +53,16 @@ split
 	} 
 }
 
+gameTime
+{
+	if(settings["syncIndividual"]) {
+		return TimeSpan.FromSeconds(current.IGT);
+	} else if(settings["syncMarathon"]) {
+		return TimeSpan.FromSeconds(current.totalIGT);
+	}	
+}
+
 isLoading
 {
-	if (current.IGT == old.IGT && settings["removeLoads"])
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return true;
 }
