@@ -18,10 +18,15 @@ startup
 {
 	settings.Add("removeLoads", true, "Load Removal");
 	settings.SetToolTip("removeLoads", "Set this to true to remove loads and menu time");
+
 	settings.Add("splitOnRoom", true, "Split on room");
 	settings.SetToolTip("splitOnRoom", "Set this to true to split after every door");
+
 	settings.Add("splitOnPortal", true, "Split on portal");
 	settings.SetToolTip("splitOnPortal", "Set this to true to split on the portal after bosses");
+
+	settings.Add("syncTimer", true, "Sync timer to game");
+	settings.SetToolTip("syncTimer", "Set this to true to sync your game time to in game clock");
 }
 
 start
@@ -45,14 +50,15 @@ split
 	} 
 }
 
+gameTime
+{
+	if(settings["syncTimer"]) {
+		return TimeSpan.FromSeconds(current.IGT);
+	}	
+}
+
 isLoading
 {
-	if (current.IGT == old.IGT && settings["removeLoads"])
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return true;
+
 }
