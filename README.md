@@ -14,3 +14,5 @@ It surely not perfect, though it seems to work.
 Any improvments will be appreciated.
 
 I'm so excited. I'm gonna submit it in the livesplit autosplitter list
+
+With the precious help of my mate FollowTheDopamine
